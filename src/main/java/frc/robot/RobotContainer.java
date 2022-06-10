@@ -11,6 +11,7 @@ import edu.wpi.first.cscore.VideoSink;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
@@ -37,6 +38,7 @@ public class RobotContainer {
 
   // drn --- declaring an instance of the XBox controller
   public final XboxController m_xboxController = new XboxController(OIConstants.kDriverControllerPort);
+  public final Joystick m_joystick = new Joystick(OIConstants.kDriverControllerPort);
 
 
   // drn -- A chooser for autonomous commands
@@ -65,10 +67,8 @@ public class RobotContainer {
 
     // drive command to split-stick arcade drive
     // split stick is left and right sticks on the XBox
-    m_robotDrive
-        .setDefaultCommand(new RunCommand(() -> m_robotDrive.arcadeDrive(-m_xboxController.getRightY(),
-            -m_xboxController.getLeftX()), m_robotDrive));
-
+    //m_robotDrive.setDefaultCommand(new RunCommand(() -> m_robotDrive.arcadeDrive(-m_xboxController.getRightY(),-m_xboxController.getLeftX()), m_robotDrive));
+    m_robotDrive.setDefaultCommand(new RunCommand(() -> m_robotDrive.arcadeDrive(m_joystick.getZ(), m_joystick.getY()), m_robotDrive));
     // drn -- put power onto shuffleboard
     sbCamera.add("PDP voltage", pdp.getVoltage())
       .withSize(1, 1).withPosition(0, 2);
