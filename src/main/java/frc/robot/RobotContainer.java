@@ -40,6 +40,13 @@ public class RobotContainer {
   public final XboxController m_xboxController = new XboxController(OIConstants.kDriverControllerPort);
   public final Joystick m_joystick = new Joystick(OIConstants.kDriverControllerPort);
 
+  //Air Compressor
+  Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
+  
+  boolean enabled = pcmCompressor.enabled();
+  boolean pressureSwitch = pcmCompressor.getPressureSwitchValue();
+  double current = pcmCompressor.getCurrent();
 
   // drn -- A chooser for autonomous commands
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
