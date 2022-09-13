@@ -30,7 +30,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     //inverting one-side
     m_oneWheel.setInverted(true);
-    m_twoWheel.setInverted(true);
+    m_twoWheel.setInverted(false);
     //
     m_drive.setDeadband(0.15);
     m_drive.setMaxOutput(DriveConstants.kMaxSpeed);
