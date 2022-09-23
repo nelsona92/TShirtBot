@@ -21,8 +21,8 @@ public final class Constants {
     public final class DriveConstants{
         public static final int kLeftMotor01CanBusID = 11;
         public static final int kRightMotor02CanBusID = 12;
-        public static final double kRampRate = 0.5;
-        public static final double kMaxSpeed = 0.9;
+        public static final double kRampRate = 3;
+        public static final double kMaxSpeed = 0.3;
     }
 
 }
