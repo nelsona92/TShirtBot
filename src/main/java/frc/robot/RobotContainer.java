@@ -13,6 +13,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -22,6 +23,8 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
@@ -44,7 +47,9 @@ public class RobotContainer {
 
   //Air Compressor
   Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
-  Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
+
+  //Valve
+  Solenoid pcmSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
   
   boolean enabled = pcmCompressor.enabled();
   boolean pressureSwitch = pcmCompressor.getPressureSwitchValue();
@@ -96,6 +101,9 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    //Valve control
+      final JoystickButton openValve = new JoystickButton(m_xboxController, Constants.kValveButton);
+      openValve.whenPressed(new StartEndCommand(() -> pcmSolenoid.set(true), () -> pcmSolenoid.set(false)).withTimeout(1.0));
 
   } // end configureButtonBindins
 
