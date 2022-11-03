@@ -103,7 +103,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     //Valve control
       final JoystickButton openValve = new JoystickButton(m_xboxController, Constants.kValveButton);
-      openValve.whenPressed(new StartEndCommand(() -> pcmSolenoid.set(true), () -> pcmSolenoid.set(false)).withTimeout(1.0));
+      openValve.whenPressed(new StartEndCommand(() -> pcmSolenoid.set(true), () -> pcmSolenoid.set(false)).withTimeout(0.025));//Normal: 0.025 for spacer bullet
 
   } // end configureButtonBindins
 
